@@ -20,5 +20,6 @@ COPY FastAPI/ .
 # Copy frontend build into FastAPI static folder
 COPY --from=frontend-build /frontend/build ./static
 
-# Run FastAPI
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "$PORT"]
+
