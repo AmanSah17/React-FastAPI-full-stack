@@ -63,7 +63,7 @@ async def create_transactions(transaction: TransactionBase, db: db_dependency):
 
 
 
-@app.get("/transactions", response_model= List[TransactionModel])
+@app.get("/transactions/", response_model= List[TransactionModel])
 
 async def read_transactions(db: db_dependency, skip : int = 0, limit: int = 200):
      
