@@ -8,7 +8,6 @@ class Transactions(Base):
     __tablename__ = 'transactions'
 
     id =  Column(Integer, primary_key= True, index= True)
-
     amount = Column(Float)
     categoory = Column(String)  
     description = Column(String)
