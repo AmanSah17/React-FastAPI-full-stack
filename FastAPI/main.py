@@ -1,13 +1,8 @@
 from fastapi import FastAPI, HTTPException, Depends
-
-
 from typing import Annotated,List
 from sqlalchemy.orm import Session
-
 from pydantic import BaseModel
-
 from database import SessionLocal, engine
-
 import models
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -76,3 +71,5 @@ async def read_transactions(db: db_dependency, skip : int = 0, limit: int = 200)
 
      return transcations
  
+
+
