@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./FastAPI
+    container_name: fastapi-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./FastAPI:/app
+
+  frontend:
+    build: ./React/finance-app
+    container_name: react-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
