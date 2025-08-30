@@ -14,12 +14,19 @@ import os
 
 
 
-
-
-
-
-
 app = FastAPI()
+
+# Serve static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Catch-all route to serve React index.html
+@app.get("/{full_path:path}")
+async def serve_react_app(full_path: str):
+    index_path = os.path.join("static", "index.html")
+    return FileResponse(index_path)
+
+
+
 
 origins = [
     'http://localhost:3000',

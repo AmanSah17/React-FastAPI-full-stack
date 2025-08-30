@@ -1,33 +1,24 @@
-# =======================
-# 1. Build React frontend
-# =======================
-FROM node:18 AS frontend-builder
-
+# Stage 1: Build React frontend
+FROM node:18 AS frontend-build
 WORKDIR /frontend
 COPY React/finance-app/package*.json ./
 RUN npm install
 COPY React/finance-app/ ./
 RUN npm run build
 
-# =======================
-# 2. Build FastAPI backend
-# =======================
+# Stage 2: Build FastAPI backend
 FROM python:3.11-slim AS backend
-
 WORKDIR /app
 
-# Install Python dependencies
+# Install FastAPI dependencies
 COPY FastAPI/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy FastAPI backend
+# Copy backend code
 COPY FastAPI/ .
 
-# Copy built frontend into backend static folder
-COPY --from=frontend-builder /frontend/build ./static
+# Copy frontend build into FastAPI static folder
+COPY --from=frontend-build /frontend/build ./static
 
-# Expose FastAPI port
-EXPOSE 8000
-
-# Run FastAPI with uvicorn
+# Run FastAPI
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
