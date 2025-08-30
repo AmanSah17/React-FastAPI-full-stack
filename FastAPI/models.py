@@ -9,7 +9,8 @@ class Transactions(Base):
 
     id =  Column(Integer, primary_key= True, index= True)
     amount = Column(Float)
-    categoory = Column(String)  
+    category = Column(String)
+  
     description = Column(String)
     is_income =  Column(Boolean)
     date = Column(String)
