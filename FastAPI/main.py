@@ -6,7 +6,7 @@ from database import SessionLocal, engine
 import models
 from fastapi.middleware.cors import CORSMiddleware
 
-from fastapi import FastAPI
+
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
@@ -35,13 +35,7 @@ app.add_middleware(
 )
 
 
-# Mount static files (React build output)
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Serve React index.html on root
-@app.get("/")
-def serve_react():
-    return FileResponse(os.path.join("static", "index.html"))
 
 
 class TransactionBase(BaseModel):
